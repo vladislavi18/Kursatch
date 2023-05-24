@@ -50,7 +50,7 @@ public:
 
 
 class Builder {
-    ship ship1 = *new ship(0, Vector2f(0, 0));
+    ship *ship1 = new ship(0, Vector2f(0, 0));
     int numberOfDecks;
 
     ship buildTheShip(Vector2f startPos);
@@ -58,19 +58,19 @@ class Builder {
 public:
     Builder(int numberOfDecks, Vector2f startPos) {
         this->numberOfDecks = numberOfDecks;
-        ship1 = buildTheShip(startPos);
+        *ship1 = buildTheShip(startPos);
     }
 
     ship getShip();
 };
 
 class Director {
-    Builder builder = *new Builder(0, Vector2f(0, 0));
+    Builder *builder = new Builder(0, Vector2f(0, 0));
 
 public:
     ship giveATask(int numberOfDecks, Vector2f startPos) {
-        builder = *new Builder(numberOfDecks, startPos);
-        return builder.getShip();
+        builder = new Builder(numberOfDecks, startPos);
+        return builder->getShip();
     }
 };
 

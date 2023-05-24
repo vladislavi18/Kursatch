@@ -9,16 +9,16 @@ void Cell::setTexture(CellState newState) {
 
     switch (state) {
         case CellState::Empty:
-            sprite.setTexture(textures.getEmptyTexture());
+            sprite.setTexture(textures->getEmptyTexture());
             break;
         case CellState::Ship:
-            sprite.setTexture(textures.getShipTexture());
+            sprite.setTexture(textures->getShipTexture());
             break;
         case CellState::Hit:
-            sprite.setTexture(textures.getHitTexture());
+            sprite.setTexture(textures->getHitTexture());
             break;
         case CellState::Miss:
-            sprite.setTexture(textures.getMissTexture());
+            sprite.setTexture(textures->getMissTexture());
             break;
     }
     sprite.setScale(0.5f, 0.5f);

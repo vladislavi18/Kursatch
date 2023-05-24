@@ -17,12 +17,12 @@ class Player {
 
 public:
     Player() {
-        Director director = *new Director();
+        Director *director = new Director();
         int decks = 1;
         int countShips = 4;
         while (countShips > 0) {
             for (int j = 0; j < countShips; ++j) {
-                ships.push_back(director.giveATask(decks, Vector2f(0, 0)));
+                ships.push_back(director->giveATask(decks, Vector2f(0, 0)));
             }
             countShips--;
             decks++;
@@ -35,11 +35,11 @@ public:
         return myArea;
     }
 
-    void Draw(RenderWindow &window);
+    void Draw(RenderWindow *window);
 
-    void Update(RenderWindow &window);
+    void Update(RenderWindow *window);
 
-    void arrangeTheShips(RenderWindow &window);
+    void arrangeTheShips(RenderWindow *window);
 };
 
 

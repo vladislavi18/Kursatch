@@ -39,10 +39,9 @@ int main() {
 //    ship2.Update();
 //    ship2.setShip(area1);
 
-    Player player = *new Player();
-    player.Draw(window);
-    player.arrangeTheShips(window);
-    Area myArea = player.dwtMyArea();
+    Player *player = new Player();
+    player->Draw(&window);
+    player->arrangeTheShips(&window);
     while (window.isOpen()) {
         sf::Event event{};
         while (window.pollEvent(event)) {
@@ -54,13 +53,13 @@ int main() {
 //        cell2.Update(window);
 
 //        area1.Update(window);
-        player.Update(window);
+        player->Update(&window);
 
         window.clear(Color::White);
 
 //        area1.Draw(window);
 
-        player.Draw(window);
+        player->Draw(&window);
 
 
 //        window.draw(cell1.getSprite());

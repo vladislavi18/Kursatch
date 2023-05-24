@@ -59,5 +59,5 @@ ship Builder::buildTheShip(Vector2f startPos) {
 }
 
 ship Builder::getShip() {
-    return ship1;
+    return *ship1;
 }

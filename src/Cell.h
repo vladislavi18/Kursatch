@@ -17,7 +17,7 @@ enum CellState {
 class Cell {
     Sprite sprite;
     CellState state;
-    Textures textures = *new Textures();
+    Textures *textures = new Textures();
 
 public:
     Cell(float posX, float posY, CellState newState) {

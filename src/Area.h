@@ -17,8 +17,8 @@ public:
         for (int i = 0; i < rowSize; ++i) {
             std::vector<Cell> string;
             for (int j = 0; j < colSize; ++j) {
-                Cell cell = *new Cell(posX, posY, CellState::Empty);
-                string.push_back(cell);
+                Cell *cell = new Cell(posX, posY, CellState::Empty);
+                string.push_back(*cell);
                 posX += spriteSize;
             }
             area.push_back(string);

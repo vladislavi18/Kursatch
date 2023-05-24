@@ -6,17 +6,17 @@
 
 class ShipMovement {
     Area area;
-    ship ship1 = *new ship(0, Vector2f(0, 0));
+    ship *ship1 = new ship(0, Vector2f(0, 0));
 
     bool isShip(Vector2f startCoordinates, float length);
 
 public:
-    ShipMovement(Area &area, ship &ship1) {
+    ShipMovement(Area &area, ship *ship1) {
         this->area = area;
         this->ship1 = ship1;
     }
 
-    void moveShip(RenderWindow &window, Area &area1, ship &ship2);
+    void moveShip(RenderWindow &window, Area &area1, ship *ship2);
 };
 
 
