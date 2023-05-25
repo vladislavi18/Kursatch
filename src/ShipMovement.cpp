@@ -36,7 +36,7 @@ bool ShipMovement::isShip(Vector2f startCoordinates, float length) {
         for (int j = y1; j < y2 + 1; ++j) {
             bool isCoor = false;
             for (int k = 0; k < coor.size(); ++k) {
-                if(Vector2f((float) i, (float) j) == coor[k]) {
+                if (Vector2f((float) i, (float) j) == coor[k]) {
                     isCoor = true;
                     break;
                 }
@@ -51,7 +51,7 @@ bool ShipMovement::isShip(Vector2f startCoordinates, float length) {
     return isShip;
 }
 
-void ShipMovement::moveShip(RenderWindow &window, Area &area1, ship *ship2) {
+void ShipMovement::moveShip(RenderWindow &window, Area &area1) {
     std::vector<Vector2f> coordinates = ship1->getCoordinates();
     float length = ship1->getLength();
     Vector2f startCoordinates = coordinates[0];
@@ -233,7 +233,97 @@ void ShipMovement::moveShip(RenderWindow &window, Area &area1, ship *ship2) {
             ship1->setIsStage();
         }
         area1 = area;
-        ship2 = ship1;
     }
 }
 
+bool ShipMovement::findEmptyPlace(int startX, int startY, std::vector<std::vector<isShip1>> &shipsArea,
+                                  std::vector<Vector2f> &coor) {
+    if (ship1->getDirection() == Direction::Horizontal) {
+        for (int i = startY; i < shipsArea.size(); ++i) {
+            int countEmptyPlace = 0;
+            for (int j = startX; j < shipsArea[0].size(); ++j) {
+                if (shipsArea[i][j] == isShip1::notSh) {
+                    countEmptyPlace++;
+                    coor.push_back(Vector2f((float) j, (float) i));
+                    if (countEmptyPlace == ship1->getLength()) {
+                        return true;
+                    }
+                } else {
+                    coor.clear();
+                    countEmptyPlace = 0;
+                }
+            }
+        }
+    } else if (ship1->getDirection() == Direction::Vertical) {
+        for (int i = startX; i < shipsArea[0].size(); ++i) {
+            int countEmptyPlace = 0;
+            for (int j = startY; j < shipsArea.size(); ++j) {
+                if (shipsArea[i][j] == isShip1::notSh) {
+                    countEmptyPlace++;
+                    coor.push_back(Vector2f((float) i, (float) j));
+                    if (countEmptyPlace == ship1->getLength()) {
+                        return true;
+                    }
+                } else {
+                    coor.clear();
+                    countEmptyPlace = 0;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void ShipMovement::autoPlacementShips(Area &area1, std::vector<std::vector<isShip1>> &shipsArea) {
+    srand(time(nullptr));
+    int x = rand() % shipsArea[0].size();
+    int y = rand() % shipsArea.size();
+
+    Direction direction = (Direction) (rand() % 2);
+    ship1->setDirection(direction);
+
+    std::vector<Vector2f> coor;
+
+    bool isEmptyPlace = findEmptyPlace(x, y, shipsArea, coor);
+
+
+    if (isEmptyPlace) {
+        bool isCanPutAShip = true;
+
+        int x1 = coor[0].x;
+        int x2 = coor[ship1->getLength() - 1].x;
+        int y1 = coor[0].y;
+        int y2 = coor[ship1->getLength() - 1].y;
+        if (coor[0].x - 1 >= 0)
+            x1 = coor[0].x - 1;
+        if (coor[ship1->getLength() - 1].x + 1 < area.getSize().x)
+            x2 = coor[ship1->getLength() - 1].x + 1;
+        if (coor[0].y - 1 >= 0)
+            y1 = coor[0].y - 1;
+        if (coor[ship1->getLength() - 1].y + 1 < area.getSize().y)
+            y2 = coor[ship1->getLength() - 1].y + 1;
+
+        for (int i = x1; i < x2 + 1; ++i) {
+            for (int j = y1; j < y2 + 1; ++j) {
+                if (shipsArea[j][i] == isShip1::Sh) {
+                    isCanPutAShip = false;
+                    break;
+                }
+            }
+            if (!isCanPutAShip)
+                break;
+        }
+
+        if (isCanPutAShip) {
+            for (auto &i: coor) {
+                shipsArea[i.y][i.x] = isShip1::Sh;
+            }
+
+            ship1->setCoordinate(coor[0]);
+            ship1->setShip(area);
+            ship1->setIsStage();
+
+            area1 = area;
+        }
+    }
+}

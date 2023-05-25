@@ -14,7 +14,7 @@ int main() {
     text.setString("Морской бой");
 
     sf::RenderWindow window(sf::VideoMode(800, 800), "ship battle");
-    window.setFramerateLimit(120);
+    window.setFramerateLimit(60);
     Textures textures = *new Textures();
 
 
@@ -41,7 +41,8 @@ int main() {
 
     Player *player = new Player();
     player->Draw(&window);
-    player->arrangeTheShips(&window);
+//    player->arrangeTheShips(&window);
+    player->arrangeTheShipsAuto(&window);
     while (window.isOpen()) {
         sf::Event event{};
         while (window.pollEvent(event)) {

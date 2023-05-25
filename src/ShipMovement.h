@@ -2,7 +2,13 @@
 #define KURSATCH3_SHIPMOVEMENT_H
 
 #include <iostream>
+#include "random"
 #include "ship.h"
+
+enum isShip1 {
+    Sh,
+    notSh
+};
 
 class ShipMovement {
     Area area;
@@ -16,7 +22,16 @@ public:
         this->ship1 = ship1;
     }
 
-    void moveShip(RenderWindow &window, Area &area1, ship *ship2);
+    void moveShip(RenderWindow &window, Area &area1);
+
+    void autoPlacementShips(Area &area1, std::vector<std::vector<isShip1>> &shipsArea);
+
+    bool findCoordinate(int x, int y, std::vector<Vector2f> &coor, std::vector<std::vector<isShip1>> &shipsArea);
+
+    bool findEmptyPlace(int startX, int startY, std::vector<std::vector<isShip1>> &shipsArea, std::vector<Vector2f> &coor);
+
+    bool findEmptyPlaceForFourDecksShip(std::vector<std::vector<isShip1>> &shipsArea,
+                                                      std::vector<Vector2f> &coor);
 };
 
 
