@@ -4,10 +4,22 @@
 
 #include "Area.h"
 
-void Area::Update(RenderWindow &window) {
-    for (auto & i : area) {
-        for (auto & j : i) {
-            j.Update(window);
+
+void Area::shot(RenderWindow &window, ShipShot *shipShot) {
+    bool isChangeState = false;
+    while (!isChangeState) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            for (int i = 0; i < area.size(); ++i) {
+                for (int j = 0; j < area[i].size(); ++j) {
+                    isChangeState = shipShot->takeAShot(window, area[i][j], i, j);
+                    if(isChangeState) {
+                        area[i][j].setTexture(shipShot->getCellStateArea()[i][j]);
+                        break;
+                    }
+                }
+                if(isChangeState)
+                    break;
+            }
         }
     }
 }
@@ -21,7 +33,7 @@ void Area::Draw(RenderWindow &window) {
 }
 
 void Area::setShipByCoordinates(std::vector<Vector2f> coordinates) {
-    for (auto & coordinate : coordinates) {
+    for (auto &coordinate: coordinates) {
         area[coordinate.y][coordinate.x].setTexture(CellState::Ship);
     }
 }
@@ -35,7 +47,7 @@ Vector2f Area::getSize() {
 }
 
 void Area::deleteShipByCoordinates(std::vector<Vector2f> coordinates) {
-    for (auto & coordinate : coordinates) {
+    for (auto &coordinate: coordinates) {
         area[coordinate.y][coordinate.x].setTexture(CellState::Empty);
     }
 }

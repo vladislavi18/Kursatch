@@ -1,7 +1,6 @@
 #ifndef KURSATCH3_SHIPMOVEMENT_H
 #define KURSATCH3_SHIPMOVEMENT_H
 
-#include <iostream>
 #include "random"
 #include "ship.h"
 

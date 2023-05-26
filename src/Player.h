@@ -5,15 +5,13 @@
 #ifndef KURSATCH3_PLAYER_H
 #define KURSATCH3_PLAYER_H
 
-#include <iostream>
-#include "ship.h"
 #include "ShipMovement.h"
 #include <SFML/Graphics.hpp>
 
 class Player {
     std::vector<ship> ships;
-    Area myArea;
-    Area enemyArea;
+    Area *myArea;
+    Area *enemyArea;
 
 public:
     Player() {
@@ -27,13 +25,13 @@ public:
             countShips++;
             decks--;
         }
-        myArea = *new Area();
-        enemyArea = *new Area(Vector2f(myArea.getWidth() + myArea.getWidth() / 4, 0));
+        myArea = new Area();
+        enemyArea = new Area(Vector2f(myArea->getWidth() + myArea->getWidth() / 4, 0));
     }
 
     void Draw(RenderWindow *window);
 
-    void Update(RenderWindow *window);
+    void shot(RenderWindow *window);
 
     void arrangeTheShips(RenderWindow *window);
 

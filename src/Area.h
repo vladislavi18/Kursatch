@@ -2,6 +2,7 @@
 #define KURSATCH3_AREA_H
 
 #include "Cell.h"
+#include "ShipShot.h"
 
 class Area {
     int rowSize = 10, colSize = 10;
@@ -31,7 +32,7 @@ public:
         return area[index];
     }
 
-    void Update(RenderWindow &window);
+    void shot(RenderWindow &window, ShipShot *shipShot);
 
     void Draw(RenderWindow &window);
 

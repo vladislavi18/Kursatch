@@ -32,11 +32,11 @@ int main() {
 //    ship ship1 = director.giveATask(3, v);
 //    ship ship2 = director.giveATask(3, v1);
 //    ship1.setDirection(Direction::Vertical);
-//    ship1.Update();
+//    ship1.shot();
 //    ship1.setShip(area1);
 
 //    ship2.setDirection(Direction::Vertical);
-//    ship2.Update();
+//    ship2.shot();
 //    ship2.setShip(area1);
 
     Player *player = new Player();
@@ -50,11 +50,11 @@ int main() {
                 window.close();
         }
 
-//        cell1.Update(window);
-//        cell2.Update(window);
+//        cell1.shot(window);
+//        cell2.shot(window);
 
-//        area1.Update(window);
-        player->Update(&window);
+//        area1.shot(window);
+        player->shot(&window);
 
         window.clear(Color::White);
 

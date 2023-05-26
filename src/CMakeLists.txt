@@ -1,4 +1,4 @@
-add_executable(Kursatch3 Cell.cpp Cell.h Textures.cpp Textures.h Cell.cpp Cell.h Area.cpp Area.h ship.cpp ship.h Player.cpp Player.h ShipMovement.cpp ShipMovement.h)
+add_executable(Kursatch3 Cell.cpp Cell.h Textures.cpp Textures.h Cell.cpp Cell.h Area.cpp Area.h ship.cpp ship.h Player.cpp Player.h ShipMovement.cpp ShipMovement.h ShipShot.cpp ShipShot.h)
 
 file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS *.cpp *.h)
 target_sources(Kursatch3 PRIVATE ${SOURCE_FILES})
