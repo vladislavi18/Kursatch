@@ -39,10 +39,16 @@ int main() {
 //    ship2.shot();
 //    ship2.setShip(area1);
 
-    Player *player = new Player();
-    player->Draw(&window);
-//    player->arrangeTheShips(&window);
+    Player *player = new Player(0);
     player->arrangeTheShipsAuto(&window);
+
+
+    Player *player1 = new Player(1);
+    player1->arrangeTheShipsAuto(&window);
+
+    player->setEnemyArea(player1->getMyArea());
+    player1->setEnemyArea(player->getMyArea());
+
     while (window.isOpen()) {
         sf::Event event{};
         while (window.pollEvent(event)) {
@@ -50,23 +56,13 @@ int main() {
                 window.close();
         }
 
-//        cell1.shot(window);
-//        cell2.shot(window);
-
-//        area1.shot(window);
         player->shot(&window);
+        std::cout << "OHHHHH NOOOO";
 
         window.clear(Color::White);
 
-//        area1.Draw(window);
-
         player->Draw(&window);
-
-
-//        window.draw(cell1.getSprite());
-//        window.draw(cell2.getSprite());
-//        window.draw(cell3.getSprite());
-//        window.draw(cell4.getSprite());
+        player1->Draw(&window);
 
         window.display();
     }

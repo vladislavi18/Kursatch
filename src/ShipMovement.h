@@ -21,6 +21,10 @@ public:
         this->ship1 = ship1;
     }
 
+    ~ShipMovement() {
+        delete ship1;
+    }
+
     void moveShip(RenderWindow &window, Area &area1);
 
     void autoPlacementShips(Area &area1, std::vector<std::vector<isShip1>> &shipsArea);

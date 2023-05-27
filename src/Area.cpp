@@ -4,6 +4,8 @@
 
 #include "Area.h"
 
+using namespace sf;
+
 
 void Area::shot(RenderWindow &window, ShipShot *shipShot) {
     bool isChangeState = false;
@@ -12,12 +14,12 @@ void Area::shot(RenderWindow &window, ShipShot *shipShot) {
             for (int i = 0; i < area.size(); ++i) {
                 for (int j = 0; j < area[i].size(); ++j) {
                     isChangeState = shipShot->takeAShot(window, area[i][j], i, j);
-                    if(isChangeState) {
+                    if (isChangeState) {
                         area[i][j].setTexture(shipShot->getCellStateArea()[i][j]);
                         break;
                     }
                 }
-                if(isChangeState)
+                if (isChangeState)
                     break;
             }
         }

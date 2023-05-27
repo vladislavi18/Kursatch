@@ -6,7 +6,7 @@
 #define KURSATCH3_SHIPSHOT_H
 
 #include "Cell.h"
-
+class Area;
 
 using namespace sf;
 
@@ -14,7 +14,7 @@ class ShipShot {
     std::vector<std::vector<CellState>> cellStateArea;
 
 public:
-    explicit ShipShot(class Area *area);
+    explicit ShipShot(Area *area);
 
     ShipShot(std::vector<std::vector<CellState>> cellStateArea) {
         this->cellStateArea = cellStateArea;

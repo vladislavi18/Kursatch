@@ -61,6 +61,10 @@ public:
         *ship1 = buildTheShip(startPos);
     }
 
+    ~Builder() {
+        delete ship1;
+    }
+
     ship getShip();
 };
 
@@ -68,6 +72,10 @@ class Director {
     Builder *builder = new Builder(0, Vector2f(0, 0));
 
 public:
+    ~Director() {
+        delete builder;
+    }
+
     ship giveATask(int numberOfDecks, Vector2f startPos) {
         builder = new Builder(numberOfDecks, startPos);
         return builder->getShip();

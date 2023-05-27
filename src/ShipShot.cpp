@@ -34,7 +34,7 @@ ShipShot::ShipShot(Area *area) {
     for (int i = 0; i < area->getSize().y; ++i) {
         std::vector<CellState> string;
         for (int j = 0; j < area->getSize().x; ++j) {
-            string.push_back(*(area[i][j]).getState());
+            string.push_back((*area)[i][j].getState());
         }
         cellStateArea.push_back(string);
     }

@@ -11,7 +11,7 @@ void Player::Draw(RenderWindow *window) {
 
 void Player::shot(RenderWindow *window) {
     ShipShot *shipShot = new ShipShot(enemyArea);
-//    enemyArea.shot(*window);
+    enemyArea->shot(*window, shipShot);
 }
 
 
@@ -47,4 +47,12 @@ void Player::arrangeTheShipsAuto(RenderWindow *window) {
             window->display();
         }
     }
+}
+
+void Player::setEnemyArea(Area *enemyArea) {
+    this->enemyArea = enemyArea;
+}
+
+Area* Player::getMyArea() {
+    return myArea;
 }

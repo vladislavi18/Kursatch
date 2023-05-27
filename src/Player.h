@@ -14,7 +14,7 @@ class Player {
     Area *enemyArea;
 
 public:
-    Player() {
+    Player(int i) {
         Director *director = new Director();
         int decks = 4;
         int countShips = 1;
@@ -25,8 +25,15 @@ public:
             countShips++;
             decks--;
         }
-        myArea = new Area();
-        enemyArea = new Area(Vector2f(myArea->getWidth() + myArea->getWidth() / 4, 0));
+        if(i == 0) {
+            myArea = new Area();
+            enemyArea = new Area(Vector2f(myArea->getWidth() + myArea->getWidth() / 4, 0));
+        }
+        else {
+            myArea = new Area(Vector2f(0, 320 + 50));
+            enemyArea = new Area(Vector2f(320+ 50, 320 + 50));
+        }
+
     }
 
     void Draw(RenderWindow *window);
@@ -36,6 +43,10 @@ public:
     void arrangeTheShips(RenderWindow *window);
 
     void arrangeTheShipsAuto(RenderWindow *window);
+
+    void setEnemyArea(Area *enemyArea);
+
+    Area* getMyArea();
 };
 
 
