@@ -54,6 +54,16 @@ bool ship::getIsStage() {
     return isStage;
 }
 
+bool ship::IsAlive(Area area) {
+    int countHitCells = 0;
+    for (auto &coordinate: coordinates) {
+        if (area[coordinate.y][coordinate.x].getState() == CellState::Hit)
+            countHitCells++;
+    }
+
+    return countHitCells != coordinates.size();
+}
+
 ship Builder::buildTheShip(Vector2f startPos) {
     return ship{numberOfDecks, startPos};
 }

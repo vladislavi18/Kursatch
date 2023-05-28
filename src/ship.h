@@ -44,6 +44,8 @@ public:
 
     void Update();
 
+    bool IsAlive(Area area);
+
     std::vector<Vector2f> getCoordinates();
 
 };

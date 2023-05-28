@@ -1,7 +1,3 @@
-//
-// Created by Acer on 22.05.2023.
-//
-
 #ifndef KURSATCH3_PLAYER_H
 #define KURSATCH3_PLAYER_H
 
@@ -25,13 +21,12 @@ public:
             countShips++;
             decks--;
         }
-        if(i == 0) {
+        if (i == 0) {
             myArea = new Area();
             enemyArea = new Area(Vector2f(myArea->getWidth() + myArea->getWidth() / 4, 0));
-        }
-        else {
+        } else {
             myArea = new Area(Vector2f(0, 320 + 50));
-            enemyArea = new Area(Vector2f(320+ 50, 320 + 50));
+            enemyArea = new Area(Vector2f(320 + 50, 320 + 50));
         }
 
     }
@@ -46,7 +41,13 @@ public:
 
     void setEnemyArea(Area *enemyArea);
 
-    Area* getMyArea();
+    bool shipsIsAlive(RenderWindow &window);
+
+    Area *getMyArea();
+};
+
+class Bot {
+    // сделать интерфейс и потом реализовать ботом
 };
 
 

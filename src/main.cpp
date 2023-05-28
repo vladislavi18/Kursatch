@@ -56,13 +56,20 @@ int main() {
                 window.close();
         }
 
-        player->shot(&window);
-        std::cout << "OHHHHH NOOOO";
 
         window.clear(Color::White);
 
         player->Draw(&window);
         player1->Draw(&window);
+
+        window.display();
+
+        player->shot(&window);
+
+        player->Draw(&window);
+        player1->Draw(&window);
+
+        player1->shipsIsAlive(window);
 
         window.display();
     }
