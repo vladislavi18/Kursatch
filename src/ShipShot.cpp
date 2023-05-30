@@ -26,6 +26,15 @@ bool ShipShot::takeAShot(RenderWindow &window, Cell cell, int i, int j) {
     return false;
 }
 
+void ShipShot::takeAShotBot(RenderWindow &window, int i, int j) {
+    if (cellStateArea[i][j] == CellState::Ship) {
+        cellStateArea[i][j] = CellState::Hit;
+    } else if (cellStateArea[i][j] == CellState::Empty) {
+        cellStateArea[i][j] = CellState::Miss;
+    }
+}
+
+
 std::vector<std::vector<CellState>> ShipShot::getCellStateArea() {
     return cellStateArea;
 }

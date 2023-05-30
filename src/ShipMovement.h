@@ -12,6 +12,7 @@ enum isShip1 {
 class ShipMovement {
     Area area;
     ship *ship1 = new ship(0, Vector2f(0, 0));
+    std::vector<std::vector<CellState>> enemyAreaC;
 
     bool isShip(Vector2f startCoordinates, float length);
 
@@ -21,20 +22,24 @@ public:
         this->ship1 = ship1;
     }
 
+    ShipMovement(std::vector<std::vector<CellState>> &areaC, ship *ship1) {
+        this->enemyAreaC = areaC;
+        this->ship1 = ship1;
+    }
+
     ~ShipMovement() {
         delete ship1;
     }
 
     void moveShip(RenderWindow &window, Area &area1);
 
-    void autoPlacementShips(Area &area1, std::vector<std::vector<isShip1>> &shipsArea);
+    void autoPlacementShips(Area &area1, std::vector<std::vector<isShip1>> &shipsArea, bool isBot);
 
-    bool findCoordinate(int x, int y, std::vector<Vector2f> &coor, std::vector<std::vector<isShip1>> &shipsArea);
+    bool
+    findEmptyPlace(int startX, int startY, std::vector<std::vector<isShip1>> &shipsArea, std::vector<Vector2f> &coor);
 
-    bool findEmptyPlace(int startX, int startY, std::vector<std::vector<isShip1>> &shipsArea, std::vector<Vector2f> &coor);
+    void autoPlacementShips(std::vector<std::vector<CellState>> *area1, std::vector<std::vector<isShip1>> &shipsArea, bool isBot);
 
-    bool findEmptyPlaceForFourDecksShip(std::vector<std::vector<isShip1>> &shipsArea,
-                                                      std::vector<Vector2f> &coor);
 };
 
 

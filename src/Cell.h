@@ -16,7 +16,7 @@ enum CellState {
 
 class Cell {
     Sprite sprite;
-    CellState state;
+    CellState state = CellState::Empty;
     Textures *textures = new Textures();
 
 public:

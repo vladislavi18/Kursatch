@@ -22,6 +22,8 @@ public:
 
     bool takeAShot(RenderWindow &window, Cell cell, int i, int j);
 
+    void takeAShotBot(RenderWindow &window, int i, int j);
+
     std::vector<std::vector<CellState>> getCellStateArea();
 
 };

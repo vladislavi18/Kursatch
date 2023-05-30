@@ -274,7 +274,7 @@ bool ShipMovement::findEmptyPlace(int startX, int startY, std::vector<std::vecto
     return false;
 }
 
-void ShipMovement::autoPlacementShips(Area &area1, std::vector<std::vector<isShip1>> &shipsArea) {
+void ShipMovement::autoPlacementShips(Area &area1, std::vector<std::vector<isShip1>> &shipsArea, bool isBot = false) {
     srand(time(nullptr));
     int x = rand() % shipsArea[0].size();
     int y = rand() % shipsArea.size();
@@ -320,10 +320,77 @@ void ShipMovement::autoPlacementShips(Area &area1, std::vector<std::vector<isShi
             }
 
             ship1->setCoordinate(coor[0]);
-            ship1->setShip(area);
+            if (!isBot)
+                ship1->setShip(area);
+            else {
+                for (auto &i: coor) {
+                    enemyAreaC[i.y][i.x] = CellState::Ship;
+                }
+            }
             ship1->setIsStage();
 
             area1 = area;
+        }
+    }
+}
+
+void ShipMovement::autoPlacementShips(std::vector<std::vector<CellState>> *area1,
+                                      std::vector<std::vector<isShip1>> &shipsArea, bool isBot = false) {
+    srand(time(nullptr));
+    int x = rand() % shipsArea[0].size();
+    int y = rand() % shipsArea.size();
+
+    Direction direction = (Direction) (rand() % 2);
+    ship1->setDirection(direction);
+
+    std::vector<Vector2f> coor;
+
+    bool isEmptyPlace = findEmptyPlace(x, y, shipsArea, coor);
+
+
+    if (isEmptyPlace) {
+        bool isCanPutAShip = true;
+
+        int x1 = coor[0].x;
+        int x2 = coor[ship1->getLength() - 1].x;
+        int y1 = coor[0].y;
+        int y2 = coor[ship1->getLength() - 1].y;
+        if (coor[0].x - 1 >= 0)
+            x1 = coor[0].x - 1;
+        if (coor[ship1->getLength() - 1].x + 1 < area.getSize().x)
+            x2 = coor[ship1->getLength() - 1].x + 1;
+        if (coor[0].y - 1 >= 0)
+            y1 = coor[0].y - 1;
+        if (coor[ship1->getLength() - 1].y + 1 < area.getSize().y)
+            y2 = coor[ship1->getLength() - 1].y + 1;
+
+        for (int i = x1; i < x2 + 1; ++i) {
+            for (int j = y1; j < y2 + 1; ++j) {
+                if (shipsArea[j][i] == isShip1::Sh) {
+                    isCanPutAShip = false;
+                    break;
+                }
+            }
+            if (!isCanPutAShip)
+                break;
+        }
+
+        if (isCanPutAShip) {
+            for (auto &i: coor) {
+                shipsArea[i.y][i.x] = isShip1::Sh;
+            }
+
+            ship1->setCoordinate(coor[0]);
+            if (!isBot)
+                ship1->setShip(area);
+            else {
+                for (auto &i: coor) {
+                    enemyAreaC[i.y][i.x] = CellState::Ship;
+                }
+            }
+            ship1->setIsStage();
+
+            *area1 = enemyAreaC;
         }
     }
 }

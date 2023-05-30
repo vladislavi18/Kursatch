@@ -26,6 +26,13 @@ void Area::shot(RenderWindow &window, ShipShot *shipShot) {
     }
 }
 
+CellState Area::shotBot(RenderWindow &window, ShipShot *shipShot, int i, int j) {
+    shipShot->takeAShotBot(window, i, j);
+    area[i][j].setTexture(shipShot->getCellStateArea()[i][j]);
+    return shipShot->getCellStateArea()[i][j];
+}
+
+
 void Area::Draw(RenderWindow &window) {
     for (int i = 0; i < area.size(); ++i) {
         for (int j = 0; j < area[i].size(); ++j) {
