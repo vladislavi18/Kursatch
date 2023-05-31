@@ -64,6 +64,7 @@ int main() {
             CellState c = bot->moveBot(&window, countAliveShips);
             if (c == CellState::Miss)
                 isMovePlayer = true;
+
         }
 
         player->shipsIsAlive(window);
