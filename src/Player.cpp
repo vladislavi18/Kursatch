@@ -89,25 +89,7 @@ bool Player1::shipsIsAlive(RenderWindow &window) {
             }
         }
     }
-    if (countAliveShips == 0) {
-        sf::Font font;
-        if (!font.loadFromFile(R"(D:\Program Files\CLionProjects\Kursatch3\fonts/arialmt.ttf)")) {
-            // Обработка ошибки загрузки шрифта
-            return EXIT_FAILURE;
-        }
-
-        sf::Text text("You are lose, Bot wins", font, 48);
-        text.setFillColor(sf::Color::Black);
-        text.setStyle(sf::Text::Bold);
-        text.setPosition(window.getSize().x / 2 - text.getGlobalBounds().width / 2,
-                         window.getSize().y / 2 - text.getGlobalBounds().height / 2);
-
-        window.clear(Color::White);
-        window.draw(text);
-        window.display();
-        sleep(seconds(5));
-        window.close();
-    }
+    return countAliveShips != 0;
 }
 
 Area *Player1::getEnemyArea() {
@@ -196,25 +178,7 @@ bool Bot::shipsIsAlive(RenderWindow &window) {
             }
         }
     }
-    if (countAliveShips == 0) {
-        sf::Font font;
-        if (!font.loadFromFile(R"(D:\Program Files\CLionProjects\Kursatch3\fonts/arialmt.ttf)")) {
-            // Обработка ошибки загрузки шрифта
-            return EXIT_FAILURE;
-        }
-
-        sf::Text text("Bot lose? You Win!", font, 48);
-        text.setFillColor(sf::Color::Black);
-        text.setStyle(sf::Text::Bold);
-        text.setPosition(window.getSize().x / 2 - text.getGlobalBounds().width / 2,
-                         window.getSize().y / 2 - text.getGlobalBounds().height / 2);
-
-        window.clear(Color::White);
-        window.draw(text);
-        window.display();
-        sleep(seconds(5));
-        window.close();
-    }
+    return countAliveShips != 0;
 }
 
 std::vector<std::vector<CellState>> Bot::GetMyArea() {
