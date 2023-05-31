@@ -40,7 +40,7 @@ public:
 
     void Draw(RenderWindow *window);
 
-    void shot(RenderWindow *window);
+    CellState shot(RenderWindow *window);
 
     void arrangeTheShips(RenderWindow *window);
 
@@ -90,10 +90,6 @@ class Bot : public Player {
     std::vector<moveCell> moves;
     bool isShip = false;
     ShotState shotState;
-//    bool isUp = false;
-//    bool isDown = false;
-//    bool isLeft = false;
-//    bool isRight = false;
     int countIsAliveEnemyShips;
     Vector2f prevCoor;
     Vector2f startCoor;
@@ -146,7 +142,7 @@ public:
 
     std::vector<std::vector<CellState>> GetMyArea();
 
-    void moveBot(RenderWindow *window, int countAliveShips);
+    CellState moveBot(RenderWindow *window, int countAliveShips);
 };
 
 

@@ -7,7 +7,7 @@
 using namespace sf;
 
 
-void Area::shot(RenderWindow &window, ShipShot *shipShot) {
+CellState Area::shot(RenderWindow &window, ShipShot *shipShot) {
     bool isChangeState = false;
     while (!isChangeState) {
         if (Mouse::isButtonPressed(Mouse::Left)) {
@@ -16,11 +16,9 @@ void Area::shot(RenderWindow &window, ShipShot *shipShot) {
                     isChangeState = shipShot->takeAShot(window, area[i][j], i, j);
                     if (isChangeState) {
                         area[i][j].setTexture(shipShot->getCellStateArea()[i][j]);
-                        break;
+                        return shipShot->getCellStateArea()[i][j];
                     }
                 }
-                if (isChangeState)
-                    break;
             }
         }
     }

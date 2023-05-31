@@ -41,7 +41,6 @@ int main() {
                 window.close();
         }
 
-
         window.clear(Color::White);
 
         player->Draw(&window);
@@ -50,7 +49,9 @@ int main() {
         window.display();
 
         if (isMovePlayer) {
-            player->shot(&window);
+            CellState c = player->shot(&window);
+            if (c == CellState::Miss)
+                isMovePlayer = false;
         }
 
         player->Draw(&window);
@@ -59,7 +60,12 @@ int main() {
         sleep(seconds(1));
 
         countAliveShips = player->countAliveShips();
-        bot->moveBot(&window, countAliveShips);
+        if (!isMovePlayer) {
+            CellState c = bot->moveBot(&window, countAliveShips);
+            if (c == CellState::Miss)
+                isMovePlayer = true;
+        }
+
         player->shipsIsAlive(window);
         bot->shipsIsAlive(window);
 

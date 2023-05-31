@@ -8,9 +8,10 @@ void Player1::Draw(RenderWindow *window) {
     myArea->Draw(*window);
 }
 
-void Player1::shot(RenderWindow *window) {
+CellState Player1::shot(RenderWindow *window) {
     ShipShot *shipShot = new ShipShot(enemyAreaC);
-    enemyArea->shot(*window, shipShot);
+    CellState c = enemyArea->shot(*window, shipShot);
+    return c;
 }
 
 
@@ -220,7 +221,7 @@ std::vector<std::vector<CellState>> Bot::GetMyArea() {
     return myAreaC;
 }
 
-void Bot::moveBot(RenderWindow *window, int countAliveShips) {
+CellState Bot::moveBot(RenderWindow *window, int countAliveShips) {
     if (countAliveShips < this->countIsAliveEnemyShips) {
         isShip = false;
         this->countIsAliveEnemyShips = countAliveShips;
@@ -270,6 +271,8 @@ void Bot::moveBot(RenderWindow *window, int countAliveShips) {
                     prevCoor = startCoor;
                     shotState = ShotState::Down;
                 }
+            } else {
+                shotState = ShotState::Down;
             }
         } else if (shotState == ShotState::Down) {
             if (prevCoor.y + 1 < myArea->getSize().y) {
@@ -281,6 +284,8 @@ void Bot::moveBot(RenderWindow *window, int countAliveShips) {
                     prevCoor = startCoor;
                     shotState = ShotState::Left;
                 }
+            } else {
+                shotState = ShotState::Left;
             }
         } else if (shotState == ShotState::Left) {
             if (prevCoor.x - 1 >= 0) {
@@ -316,6 +321,7 @@ void Bot::moveBot(RenderWindow *window, int countAliveShips) {
             prevCoor = moves[0].getCoordinates();
         moves.erase(moves.begin());
     }
+    return c;
 }
 
 void Bot::setVectorMoves(int value) {

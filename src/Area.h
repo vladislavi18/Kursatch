@@ -28,22 +28,11 @@ public:
         }
     }
 
-//    ~Area() {
-//        for (auto &row: area) {
-//            for (auto &cell: row) {
-//                delete &cell;
-//            }
-//            row.clear();
-//        }
-//        area.clear();
-//    }
-
-
     std::vector<Cell> &operator[](int index) {
         return area[index];
     }
 
-    void shot(RenderWindow &window, ShipShot *shipShot);
+    CellState shot(RenderWindow &window, ShipShot *shipShot);
 
     CellState shotBot(RenderWindow &window, ShipShot *shipShot, int i, int j);
 
